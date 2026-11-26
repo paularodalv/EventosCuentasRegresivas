@@ -143,6 +143,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--ev-accent);outline-
   text-transform:var(--ev-title-transform);letter-spacing:var(--ev-title-spacing);
   font-size:clamp(42px,9vw,96px);line-height:1;margin:14px 0 16px;
 }
+/* Título-imagen de la portada: <h1 class="hub-title"><img class="hub-logo" src="logo.svg" alt="…"></h1> */
+.hub-title{margin:14px 0 16px;line-height:0}
+.hub-logo{display:block;width:100%;height:auto;max-width:720px;filter:drop-shadow(0 18px 34px color-mix(in srgb,var(--ev-glow) 45%,transparent))}
 .hub-lead{max-width:560px;color:var(--ev-muted);margin:0}
 .activity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2.4vw,24px);margin-top:clamp(32px,6vw,54px)}
 .activity-link{

@@ -1,0 +1,10 @@
+Portadas de eventos
+
+Coloca aquí las imágenes de portada y usa su ruta en el atributo src del
+elemento <img class="work-cover-img"> de cada tarjeta en index.html.
+
+Ejemplo:
+  <img class="work-cover-img" src="assets/covers/roleplay-es-ducks.jpg" alt="Portada de Roleplay ES Ducks" onerror="this.remove()">
+
+Formatos recomendados: JPG, PNG o WebP. Proporción recomendada: horizontal (por ejemplo 1200x800).
+Si la imagen no existe o falla, se elimina y se muestra el diseño de respaldo de la tarjeta.

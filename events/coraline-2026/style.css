@@ -1,4 +1,4 @@
-/* ===== Encuentro Aurora · tema propio =====
+/* ===== Evento Caroline · tema propio =====
    Cambia las variables para recolorear todo el evento.
    Los ornamentos (cintas de aurora, estrellas) están al final. */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
@@ -21,3 +21,5 @@
 @keyframes aurora-drift{from{transform:translateX(-2.5%)}to{transform:translateX(2.5%)}}
 .orn-sun{position:absolute;left:50%;bottom:-36vmin;width:56vmin;height:56vmin;transform:translateX(-50%);border-radius:50%;
   background:radial-gradient(circle,#ffd2a8 0,#f2a56e 38%,transparent 68%);opacity:.45}
+/* Logotipo de la portada */
+.hub-logo{max-width:780px}

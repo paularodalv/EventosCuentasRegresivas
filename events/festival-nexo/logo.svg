@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 210" role="img" aria-label="Festival Nexo">
+  <defs>
+    <linearGradient id="nexoText" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d3ff78"/>
+      <stop offset=".55" stop-color="#a9f5a0"/>
+      <stop offset="1" stop-color="#78e0c9"/>
+    </linearGradient>
+    <linearGradient id="nexoLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#78e0c9" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#78e0c9"/>
+      <stop offset="1" stop-color="#d3ff78" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="320" cy="104" rx="302" ry="70" fill="none" stroke="#78e0c9" stroke-opacity=".4" stroke-width="3" transform="rotate(-8 320 104)"/>
+  <ellipse cx="320" cy="104" rx="250" ry="52" fill="none" stroke="#d3ff78" stroke-opacity=".22" stroke-width="2" transform="rotate(9 320 104)"/>
+  <text x="320" y="74" text-anchor="middle" font-family="'Arial Black', Arial, sans-serif" font-weight="700" font-size="32" letter-spacing="11" fill="#bfe3d8">FESTIVAL</text>
+  <text x="320" y="170" text-anchor="middle" font-family="'Arial Black', Arial, sans-serif" font-weight="700" font-size="118" letter-spacing="7" fill="url(#nexoText)">NEXO</text>
+  <path d="M90 188C220 176 420 176 550 188" fill="none" stroke="url(#nexoLine)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="600" cy="48" r="6" fill="#d3ff78" opacity=".9"/>
+  <circle cx="40" cy="150" r="4" fill="#78e0c9" opacity=".8"/>
+</svg>

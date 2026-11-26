@@ -20,6 +20,7 @@ assets/event-base.css          Estilo base de eventos y cuentas regresivas
 assets/countdown.js            Lógica de todos los contadores
 events/<evento>/index.html     Página del evento
 events/<evento>/style.css      Tema propio del evento (colores, fuentes, ornamentos)
+events/<evento>/logo.svg       Logotipo-imagen del título de la portada
 events/<evento>/<actividad>/index.html   Una cuenta regresiva
 ```
 
@@ -35,6 +36,16 @@ Cambia las variables `--ev-*` y todo el evento cambia a la vez:
 | `--ev-accent`, `--ev-on-accent` | Sello, anillos, botón destacado y su texto |
 | `--ev-font-display`, `--ev-font-body`, `--ev-font-num` | Tipografías (título, texto, números) |
 | `--ev-title-transform`, `--ev-title-style`, `--ev-title-weight` | Mayúsculas, cursiva y peso del título |
+
+### Logotipo de la portada
+
+El título de la portada de cada evento es una imagen, no texto: `events/<evento>/logo.svg`, insertada así:
+
+```html
+<h1 class="hub-title"><img class="hub-logo" src="logo.svg" alt="Nombre del evento" width="980" height="210"></h1>
+```
+
+Para usar tu propio diseño, reemplaza `logo.svg` (o cambia el `src` por un `.png`/`.webp`) y ajusta el ancho con `.hub-logo{max-width:…}` al final de `style.css`. Mantén un `alt` con el nombre del evento.
 
 Al final de `style.css` puedes añadir los **ornamentos propios** del evento (Aurora tiene cintas y un sol; Nexo tiene órbitas y un ecualizador).
 

@@ -25,3 +25,5 @@
   background:linear-gradient(180deg,var(--ev-accent),transparent);
   animation:eq calc(1.1s + var(--i)*.07s) ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.13s)}
 @keyframes eq{from{transform:scaleY(.18)}to{transform:scaleY(1)}}
+/* Logotipo de la portada */
+.hub-logo{max-width:480px}
