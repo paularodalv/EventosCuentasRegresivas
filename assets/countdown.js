@@ -1,18 +1,18 @@
-// Cuentas regresivas estáticas (GitHub Pages, sin servidor).
-// Cada fecha ISO lleva su propio desplazamiento (+01:00, -05:00…), así que todos
-// los visitantes cuentan hacia el mismo instante, sea cual sea su zona horaria.
+// Static countdowns (GitHub Pages, serverless).
+// Each ISO date includes its own offset (+01:00, -05:00…), so all
+// visitors count down to the exact same instant regardless of their timezone.
 //
-// Elementos que reconoce este script:
-// [data-countdown] Contador principal de una página (ver README).
-//   - data-target: fecha de inicio o fecha objetivo principal (ISO).
-//   - data-end (opcional): fecha de cierre; si existe, muestra cuenta atrás hasta
-//     el cierre cuando ya pasó data-target, y marca finalizado al pasar data-end.
-// [data-until] Texto corto en cualquier lugar.
-//   - data-until: fecha de inicio (ISO).
-//   - data-until-end (opcional): fecha de cierre (ISO) para pasar automáticamente
-//     de "Empieza en..." -> "Activa · Cierra en..." -> "Cerrada".
-// [data-soonest] Contenedor que muestra la fecha futura más cercana
-// entre todos los [data-soonest-source] de la página.
+// Elements recognized by this script:
+// [data-countdown] Main page countdown (see README).
+//   - data-target: start date or main target date (ISO).
+//   - data-end (optional): end date; if provided, counts down to closing
+//     once data-target has passed, and marks as finished after data-end.
+// [data-until] Short status label anywhere on the page.
+//   - data-until: start date (ISO).
+//   - data-until-end (optional): end date (ISO) to automatically transition
+//     from "Starts in..." -> "Active · Ends in..." -> "Closed".
+// [data-soonest] Container showing the nearest upcoming date
+// among all [data-soonest-source] elements on the page.
 (() => {
   const pad = n => String(n).padStart(2, "0");
   const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
@@ -31,17 +31,17 @@
  
   function short(ms) {
     const t = split(ms);
-    if (t.d >= 1) return plural(t.d, "día", "días");
+    if (t.d >= 1) return plural(t.d, "day", "days");
     if (t.h >= 1) return `${t.h} h ${pad(t.m)} min`;
     return `${t.m} min ${pad(t.s)} s`;
   }
  
-  // "2026-12-10T10:00:00+01:00" -> "10 dic 2026 · 10:00 (GMT+1)", leído del propio texto.
+  // "2026-12-10T10:00:00+01:00" -> "10 Dec 2026 · 10:00 (GMT+1)", parsed directly from the string.
   function zoneLabel(iso) {
     const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::\d{2}(?:\.\d+)?)?(Z|[+-]\d{2}(?::?\d{2})?)$/.exec(iso || "");
     if (!m) return "";
     const [, y, mo, d, hh, mm, off] = m;
-    const month = new Intl.DateTimeFormat("es", { month: "short", timeZone: "UTC" })
+    const month = new Intl.DateTimeFormat("en", { month: "short", timeZone: "UTC" })
       .format(new Date(Date.UTC(+y, +mo - 1, +d))).replace(".", "");
     let gmt = "GMT";
     if (off !== "Z") {
@@ -55,13 +55,13 @@
  
   function localLabel(time) {
     try {
-      return new Intl.DateTimeFormat("es", {
+      return new Intl.DateTimeFormat("en", {
         day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZoneName: "short"
       }).format(new Date(time)).replace(/\./g, "");
     } catch (e) { return ""; }
   }
  
-  // ---------- Contadores principales ----------
+  // ---------- Main countdowns ----------
   const mains = [...document.querySelectorAll("[data-countdown]")].map(root => {
     const startTime = parse(root.dataset.target);
     const endTime = parse(root.dataset.end);
@@ -86,7 +86,7 @@
       if (zone) zone.textContent = zoneLabel(infoIso);
       if (local) {
         const text = localLabel(infoDate);
-        if (text) local.textContent = "Tu hora: " + text; else local.hidden = true;
+        if (text) local.textContent = "Your time: " + text; else local.hidden = true;
       }
     }
     return item;
@@ -119,7 +119,7 @@
  
   function renderMain(item, now) {
     if (!Number.isFinite(item.startTime)) {
-      if (item.message) item.message.textContent = "La fecha de destino no es válida.";
+      if (item.message) item.message.textContent = "Invalid target date.";
       return;
     }
  
@@ -139,11 +139,11 @@
       } else {
         targetTime = item.endTime;
         nextState = "finished";
-        statusMsg = item.root.dataset.finished || "Ended!";
+        statusMsg = item.root.dataset.finished || "It has ended!";
       }
     } else if (now >= item.startTime) {
       nextState = "finished";
-      statusMsg = item.root.dataset.finished || "It's the time!";
+      statusMsg = item.root.dataset.finished || "The time has come!";
     }
  
     const remaining = targetTime - now;
@@ -161,13 +161,13 @@
     applyState(item, nextState);
   }
  
-  // ---------- Textos cortos [data-until] ----------
+  // ---------- Short labels [data-until] ----------
   const chips = [...document.querySelectorAll("[data-until]")].map(el => ({
     el,
     start: parse(el.dataset.until),
     end: parse(el.dataset.untilEnd),
     label: el.dataset.untilLabel || "Starts in {t}",
-    activeLabel: el.dataset.untilActive || "Open · Closes in {t}",
+    activeLabel: el.dataset.untilActive || "Active · Ends in {t}",
     done: el.dataset.untilDone || "Closed"
   }));
  
@@ -190,7 +190,7 @@
     }
   }
  
-  // ---------- Fecha más cercana [data-soonest] ----------
+  // ---------- Nearest upcoming date [data-soonest] ----------
   const soonestBox = document.querySelector("[data-soonest]");
   const sources = [...document.querySelectorAll("[data-soonest-source]")]
     .map(el => ({ name: el.dataset.name || "", time: parse(el.dataset.target) }))
