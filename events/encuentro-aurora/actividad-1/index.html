@@ -4,31 +4,75 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Actividad 1 · Encuentro Aurora</title>
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../../assets/event-base.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <header class="event-header">
-    <a class="event-brand" href="../index.html">ENCUENTRO AURORA</a>
-    <a class="back-link" href="../index.html">← Volver al evento</a>
+  <header class="ev-header">
+    <a class="ev-brand" href="../index.html">ENCUENTRO AURORA</a>
+    <a class="ev-back" href="../index.html">← Volver al evento</a>
   </header>
-  <main class="event-main">
-    <p class="event-kicker">CUENTA REGRESIVA · ENCUENTRO AURORA</p>
-    <h1>Actividad 1</h1>
-    <p class="event-description">Comienzo de la primera actividad.</p>
-    <section class="countdown-wrap" data-countdown
+  <main class="cd-stage">
+    <!-- 1) ORNAMENTOS: decorado propio del evento. Añade aquí tus formas, SVG o imágenes. -->
+    <div class="cd-ornaments" aria-hidden="true">
+      <div class="orn-sun"></div>
+      <svg class="orn-ribbons" viewBox="0 0 1200 400" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="rb1" x1="0" x2="1"><stop offset="0" stop-color="#7f62e0" stop-opacity="0"/><stop offset=".5" stop-color="#f59a82"/><stop offset="1" stop-color="#ffbf9f" stop-opacity="0"/></linearGradient>
+          <linearGradient id="rb2" x1="0" x2="1"><stop offset="0" stop-color="#ffbf9f" stop-opacity="0"/><stop offset=".5" stop-color="#9b7bf0"/><stop offset="1" stop-color="#f59a82" stop-opacity="0"/></linearGradient>
+        </defs>
+        <g>
+          <path d="M0 270C190 140 400 350 640 215S1010 130 1200 250" stroke="url(#rb1)" stroke-width="3"/>
+          <path d="M0 320C220 210 420 380 660 275S1020 210 1200 310" stroke="url(#rb2)" stroke-width="2.5"/>
+          <path d="M0 225C170 110 420 290 650 170S1020 90 1200 205" stroke="url(#rb1)" stroke-width="1.5" opacity=".6"/>
+        </g>
+      </svg>
+      <span class="cd-ring" style="--x:7%;--y:16%;--s:22px"></span>
+      <span class="cd-ring" style="--x:90%;--y:62%;--s:16px"></span>
+      <span class="cd-dot" style="--x:16%;--y:70%;--s:9px"></span>
+      <span class="cd-dot" style="--x:82%;--y:14%;--s:7px"></span>
+      <span class="cd-dot" style="--x:48%;--y:7%;--s:6px"></span>
+    </div>
+
+    <section class="cd-card" data-countdown
       data-target="2026-12-10T10:00:00+01:00"
-      data-finished="¡Ha llegado el momento!">
-      <div class="countdown" aria-live="off">
-        <div class="time-unit"><strong data-days>--</strong><span>DÍAS</span></div>
-        <div class="time-unit"><strong data-hours>--</strong><span>HORAS</span></div>
-        <div class="time-unit"><strong data-minutes>--</strong><span>MINUTOS</span></div>
-        <div class="time-unit"><strong data-seconds>--</strong><span>SEGUNDOS</span></div>
+      data-finished="¡Ya empezó!"
+      data-finished-title="¡Ya empezó!">
+
+      <!-- 2) SELLO: icono y palabra propios de esta cuenta regresiva. -->
+      <div class="cd-sticker" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M20 3c1.6 9.5 4.5 12.5 15 17-10.5 4.5-13.4 7.5-15 17-1.6-9.5-4.5-12.5-15-17C15.5 15.5 18.4 12.5 20 3z" fill="currentColor"/></svg>
+        <span>Actividad 1</span>
       </div>
-      <p class="countdown-message" data-message></p>
-      <p class="timezone-note">Fecha objetivo: 2026-12-10T10:00:00+01:00 · Zona de referencia: GMT+1</p>
+
+      <h1 class="cd-heading">
+        <span class="cd-name">Actividad 1</span>
+        <!-- 3) TÍTULO: la frase que acompaña a los números. -->
+        <span class="cd-title" data-title>Empieza en</span>
+      </h1>
+
+      <!-- 4) FICHAS: data-shape = rounded (por defecto) | soft | circle | square -->
+      <div class="countdown" data-shape="soft" aria-live="off">
+        <div class="unit"><div class="tile"><strong data-days>--</strong></div><span>Días</span></div>
+        <div class="unit"><div class="tile"><strong data-hours>--</strong></div><span>Horas</span></div>
+        <div class="unit"><div class="tile"><strong data-minutes>--</strong></div><span>Minutos</span></div>
+        <div class="unit"><div class="tile"><strong data-seconds>--</strong></div><span>Segundos</span></div>
+      </div>
+
+      <!-- 5) TEXTO, FECHA Y BOTÓN propios de esta cuenta regresiva. -->
+      <p class="cd-desc">Falta poco para la primera actividad de Encuentro Aurora.</p>
+      <p class="cd-message" data-message role="status"></p>
+      <ul class="cd-meta">
+        <li data-zone-date></li>
+        <li data-local-date></li>
+      </ul>
+      <div class="cd-actions">
+        <a class="cd-cta" href="../index.html" data-show-when="running">Ver todas las actividades</a>
+        <a class="cd-cta cd-cta--solid" href="../index.html" data-show-when="finished" hidden>Volver al evento</a>
+      </div>
     </section>
   </main>
-  <footer class="event-footer">Encuentro Aurora · Esta página pertenece únicamente a este evento.</footer>
+  <footer class="ev-footer">Encuentro Aurora · Esta página pertenece únicamente a este evento.</footer>
   <script src="../../../assets/countdown.js"></script>
 </body>
 </html>

@@ -4,40 +4,64 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Encuentro Aurora</title>
+  <link rel="stylesheet" href="../../assets/event-base.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="event-header">
-    <a class="event-brand" href="../../index.html">EVENTOS. / PORTFOLIO</a>
-    <a class="back-link" href="../../index.html">← Volver al portfolio</a>
+  <header class="ev-header">
+    <a class="ev-brand" href="../../index.html">EVENTOS. / PORTFOLIO</a>
+    <a class="ev-back" href="../../index.html">← Volver al portfolio</a>
   </header>
-  <main class="event-main">
-    <p class="event-kicker">CONFERENCIA · DICIEMBRE 2026</p>
-    <h1>Encuentro Aurora</h1>
-    <p class="event-description">Un encuentro para compartir ideas, creatividad y nuevas perspectivas.</p>
-    <section class="activity-grid" aria-label="Secciones de Encuentro Aurora">
+  <main class="cd-stage">
+    <!-- Ornamentos propios del evento (estilos en style.css) -->
+    <div class="cd-ornaments" aria-hidden="true">
+      <div class="orn-sun"></div>
+      <svg class="orn-ribbons" viewBox="0 0 1200 400" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="rb1" x1="0" x2="1"><stop offset="0" stop-color="#7f62e0" stop-opacity="0"/><stop offset=".5" stop-color="#f59a82"/><stop offset="1" stop-color="#ffbf9f" stop-opacity="0"/></linearGradient>
+          <linearGradient id="rb2" x1="0" x2="1"><stop offset="0" stop-color="#ffbf9f" stop-opacity="0"/><stop offset=".5" stop-color="#9b7bf0"/><stop offset="1" stop-color="#f59a82" stop-opacity="0"/></linearGradient>
+        </defs>
+        <g>
+          <path d="M0 270C190 140 400 350 640 215S1010 130 1200 250" stroke="url(#rb1)" stroke-width="3"/>
+          <path d="M0 320C220 210 420 380 660 275S1020 210 1200 310" stroke="url(#rb2)" stroke-width="2.5"/>
+          <path d="M0 225C170 110 420 290 650 170S1020 90 1200 205" stroke="url(#rb1)" stroke-width="1.5" opacity=".6"/>
+        </g>
+      </svg>
+      <span class="cd-ring" style="--x:7%;--y:16%;--s:22px"></span>
+      <span class="cd-ring" style="--x:90%;--y:62%;--s:16px"></span>
+      <span class="cd-dot" style="--x:16%;--y:70%;--s:9px"></span>
+      <span class="cd-dot" style="--x:82%;--y:14%;--s:7px"></span>
+      <span class="cd-dot" style="--x:48%;--y:7%;--s:6px"></span>
+    </div>
+    <div class="hub">
+      <p class="hub-kicker">Conferencia · Diciembre 2026</p>
+      <h1>Encuentro Aurora</h1>
+      <p class="hub-lead">Un encuentro para compartir ideas, creatividad y nuevas perspectivas.</p>
+      <nav class="activity-grid" aria-label="Secciones de Encuentro Aurora">
       <a class="activity-link" href="actividad-1/index.html">
-        <span class="activity-number">01 / CUENTA REGRESIVA</span>
+        <span class="activity-when" data-until="2026-12-10T10:00:00+01:00" data-until-label="Faltan {t}" data-until-done="Ya disponible"></span>
         <h2>Actividad 1</h2>
         <p>Comienzo de la primera actividad.</p>
       </a>
       <a class="activity-link" href="actividad-2/index.html">
-        <span class="activity-number">02 / CUENTA REGRESIVA</span>
+        <span class="activity-when" data-until="2026-12-10T16:00:00+01:00" data-until-label="Faltan {t}" data-until-done="Ya disponible"></span>
         <h2>Actividad 2</h2>
         <p>Inicio de la segunda actividad.</p>
       </a>
       <a class="activity-link" href="registro/index.html">
-        <span class="activity-number">03 / CUENTA REGRESIVA</span>
+        <span class="activity-when" data-until="2026-12-01T09:00:00+01:00" data-until-label="Faltan {t}" data-until-done="Ya disponible"></span>
         <h2>Apertura del registro</h2>
         <p>Apertura del periodo de registro.</p>
       </a>
       <a class="activity-link" href="final/index.html">
-        <span class="activity-number">04 / CUENTA REGRESIVA</span>
+        <span class="activity-when" data-until="2026-12-12T23:59:59+01:00" data-until-label="Faltan {t}" data-until-done="Ya disponible"></span>
         <h2>Final del evento</h2>
         <p>Cierre del encuentro.</p>
       </a>
-    </section>
+      </nav>
+    </div>
   </main>
-  <footer class="event-footer">Encuentro Aurora · Página independiente del evento.</footer>
+  <footer class="ev-footer">Encuentro Aurora · Página independiente del evento.</footer>
+  <script src="../../assets/countdown.js"></script>
 </body>
 </html>

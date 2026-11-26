@@ -1,52 +1,72 @@
 # Portfolio de eventos para GitHub Pages
 
-Proyecto estático de ejemplo con:
-- Una portada/portfolio con tarjetas.
-- Una página independiente para cada evento.
-- Páginas de cuenta regresiva para actividades, registro y final.
-- Diseño propio por evento.
-- Un único script reutilizable para los contadores.
+- **Portfolio** (`index.html`) con el diseño "Solar Pop": crema, naranja y rosa, con una vista previa en vivo de lo próximo.
+- **Una página por evento** con sus actividades.
+- **Cuentas regresivas** con fichas oscuras de borde luminoso, personalizables por evento y por actividad.
+- Un único script (`assets/countdown.js`) para todos los contadores.
 
 ## Publicar en GitHub Pages
 
-1. Crea un repositorio público en GitHub, por ejemplo `eventos-portfolio`.
-2. Sube el contenido de esta carpeta a la raíz del repositorio.
-3. En GitHub, abre **Settings → Pages**.
-4. En **Build and deployment**, selecciona **Deploy from a branch**.
-5. Elige la rama `main` y la carpeta `/ (root)`.
-6. Guarda y espera a que GitHub Pages publique el sitio.
+1. Crea un repositorio público y sube el contenido de esta carpeta a la raíz.
+2. **Settings → Pages → Deploy from a branch**, rama `main`, carpeta `/ (root)`.
+3. La dirección será `https://TU-USUARIO.github.io/NOMBRE-DEL-REPO/`.
 
-La dirección tendrá esta forma:
-`https://TU-USUARIO.github.io/eventos-portfolio/`
+## Estructura
+
+```
+index.html                     Portfolio
+assets/portfolio.css           Estilo del portfolio
+assets/event-base.css          Estilo base de eventos y cuentas regresivas
+assets/countdown.js            Lógica de todos los contadores
+events/<evento>/index.html     Página del evento
+events/<evento>/style.css      Tema propio del evento (colores, fuentes, ornamentos)
+events/<evento>/<actividad>/index.html   Una cuenta regresiva
+```
+
+## Personalizar un evento (events/<evento>/style.css)
+
+Cambia las variables `--ev-*` y todo el evento cambia a la vez:
+
+| Variable | Qué controla |
+|---|---|
+| `--ev-bg-a`, `--ev-bg-b` | Degradado de fondo |
+| `--ev-disc-a`, `--ev-disc-b` | Elipse central |
+| `--ev-tile`, `--ev-edge-a`, `--ev-edge-b`, `--ev-glow` | Fichas: fondo, borde y resplandor |
+| `--ev-accent`, `--ev-on-accent` | Sello, anillos, botón destacado y su texto |
+| `--ev-font-display`, `--ev-font-body`, `--ev-font-num` | Tipografías (título, texto, números) |
+| `--ev-title-transform`, `--ev-title-style`, `--ev-title-weight` | Mayúsculas, cursiva y peso del título |
+
+Al final de `style.css` puedes añadir los **ornamentos propios** del evento (Aurora tiene cintas y un sol; Nexo tiene órbitas y un ecualizador).
+
+## Personalizar cada cuenta regresiva
+
+Cada página de cuenta regresiva tiene cinco bloques numerados con comentarios:
+
+1. **Ornamentos** (`.cd-ornaments`): pega aquí SVG, formas o imágenes. Ayudantes: `.cd-ring` y `.cd-dot` con `style="--x:10%;--y:20%;--s:20px"`.
+2. **Sello** (`.cd-sticker`): icono y palabra propios de esa actividad.
+3. **Título** (`data-title`): la frase junto a los números ("Abre en", "Suena en"…).
+4. **Fichas** (`data-shape`): `rounded` (por defecto), `soft`, `circle` o `square`.
+5. **Texto, fecha y botón**: descripción, enlace y etiquetas. La fecha del evento y "Tu hora" se rellenan solas.
+
+Atributos de `data-countdown`:
+- `data-target`: fecha ISO con desplazamiento (ver abajo).
+- `data-finished`: mensaje al llegar a cero.
+- `data-finished-title`: sustituye al título al llegar a cero.
+
+Cualquier elemento con `data-show-when="running"` solo se ve mientras corre la cuenta, y con `data-show-when="finished"` solo cuando termina (añádele `hidden`). Sirve, por ejemplo, para mostrar un botón "Ir al registro" cuando el registro abre.
 
 ## Añadir un evento
 
-1. Duplica una carpeta dentro de `events/`.
-2. Cambia el nombre de la carpeta por un identificador sin espacios ni tildes.
-3. Personaliza `index.html` y `style.css` del evento.
-4. Crea una carpeta por actividad, registro o final, cada una con su `index.html`.
-5. Añade una tarjeta en el `index.html` principal que apunte a `events/TU-EVENTO/index.html`.
+1. Duplica una carpeta de `events/` y cambia su nombre (sin espacios ni tildes).
+2. Edita `style.css` (tema) y las páginas.
+3. Añade una tarjeta en `index.html` (copia una `.work`) y cambia enlace, colores y fechas.
+   Los elementos `data-soonest-source` alimentan la vista previa "Lo próximo" del portfolio.
+4. Actualiza las cifras de la sección "En números" si quieres que sigan siendo ciertas.
 
 ## Cambiar una fecha y su GMT
 
-En cada página de cuenta regresiva, modifica `data-target`:
+En `data-target`: `2027-01-15T20:30:00+01:00`. El desplazamiento forma parte de la fecha y define el instante exacto: `+00:00` (UTC), `+01:00` (GMT+1), `-05:00` (GMT-5). No uses abreviaturas como CET o EST.
 
-`data-target="2027-01-15T20:30:00+01:00"`
+## Limitación de GitHub Pages
 
-El desplazamiento `+01:00` forma parte de la fecha y define el instante exacto. Ejemplos:
-- UTC/GMT: `+00:00`
-- GMT+1: `+01:00`
-- GMT+2: `+02:00`
-- GMT-5: `-05:00`
-
-No uses abreviaturas ambiguas como CET, EST o BST en la fecha ISO. Usa siempre un desplazamiento numérico.
-
-## Limitación importante de GitHub Pages
-
-GitHub Pages solo aloja archivos estáticos: no ejecuta Node.js ni código de servidor. El contador de este proyecto calcula el tiempo restante en el navegador contra un instante absoluto, por lo que todos los visitantes tienen el mismo objetivo y la misma cuenta teórica. Sin embargo, el reloj del dispositivo puede estar adelantado o atrasado.
-
-Si necesitas sincronización estricta con un reloj de servidor, tendrás que añadir un servicio externo (por ejemplo, una función serverless) y consultar esa hora. Si el contador controla una acción importante —como cerrar inscripciones o habilitar una actividad— esa acción también debe validarse en el backend; ocultarla en el navegador no la protege.
-
-## Diseño y privacidad de navegación
-
-Los enlaces de cada actividad vuelven únicamente a la página de su propio evento. No hay enlaces entre eventos en sus páginas internas. Aun así, las URL de las páginas públicas son accesibles si alguien las conoce: GitHub Pages no proporciona protección de acceso por carpetas.
+Solo aloja archivos estáticos. El contador calcula en el navegador contra un instante absoluto, así que todos cuentan hacia el mismo momento, pero el reloj del dispositivo puede estar desajustado. Si el contador controla algo importante (cerrar inscripciones, habilitar una actividad), valida también en un servidor: ocultar un botón en el navegador no lo protege. Las URL públicas son accesibles para quien las conozca.
