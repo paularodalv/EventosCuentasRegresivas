@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Layali al-Sham">
+  <g fill="none" stroke="#f1c76a" stroke-width="4" stroke-linejoin="round">
+    <rect x="52" y="52" width="96" height="96"/>
+    <rect x="52" y="52" width="96" height="96" transform="rotate(45 100 100)"/>
+    <circle cx="100" cy="100" r="22"/>
+  </g>
+  <circle cx="100" cy="100" r="9" fill="#f1c76a"/>
+</svg>
