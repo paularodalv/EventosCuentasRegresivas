@@ -1,22 +1,30 @@
-/* ===== Layali al-Sham · tema propio (inspirado en Siria) =====
-   Paleta: granada y rosa de Damasco, oro de los mosaicos omeyas, crema de jazmín.
-   Ornamentos: arco apuntado con dovelas alternas (ablaq), estrella de ocho puntas
-   (khatam) y franja de piedra bicolor. */
+/* ===== Layali al-Sham · tema propio, inspirado en la bandera de Siria =====
+   Tricolor verde, blanco y negro con tres estrellas rojas de cinco puntas.
+   - El fondo es la bandera: franja verde arriba, blanca en el centro, negra abajo.
+   - Tres estrellas rojas gigantes cruzan la franja central.
+   - Cada actividad usa un color de la bandera (verde, blanco, negro, rojo) con
+     una clase en <body>: act-green | act-white | act-black | act-red. */
 @import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=Cairo:wght@500;600;700;800&display=swap');
 
 :root {
-  --ev-bg-a: #1b0610;        /* granada muy oscura */
-  --ev-bg-b: #3d0f20;        /* vino de Damasco */
-  --ev-disc-a: #7d1d3b;      /* rosa damascena */
-  --ev-disc-b: #2e0a18;
-  --ev-glow: #e0607e;
-  --ev-tile: #16060c;
-  --ev-edge-a: #f1c76a;      /* oro omeya */
-  --ev-edge-b: #d9556f;
-  --ev-text: #fff4e4;        /* crema de jazmín */
-  --ev-muted: #ecc9cb;
-  --ev-accent: #f1c76a;
-  --ev-on-accent: #2a0a14;
+  --flag-green: #0b7a43;
+  --flag-red: #ce1126;
+  --flag-white: #f5f3ea;
+  --flag-black: #0a0d0b;
+
+  --ev-bg-a: #0a3b25;        /* verde profundo */
+  --ev-bg-b: #050806;        /* negro basalto */
+  --ev-glow: #1fa463;
+  --ev-tile: #08110c;
+  --ev-edge-a: #1fa463;
+  --ev-edge-b: #f5f3ea;
+  --ev-text: #f7f6ef;
+  --ev-muted: #c3d3c9;
+  --ev-accent: #f5f3ea;
+  --ev-on-accent: #0a0d0b;
+  --ev-star: #ce1126;        /* color de las estrellas */
+  --ev-solid: #ce1126;       /* sello y botón destacado */
+  --ev-on-solid: #ffffff;
   --ev-font-display: 'Reem Kufi', 'Cairo', system-ui, sans-serif;
   --ev-font-body: 'Cairo', system-ui, sans-serif;
   --ev-font-num: 'Reem Kufi', 'Cairo', system-ui, sans-serif;
@@ -26,48 +34,65 @@
   --ev-radius: 20px;
 }
 
-/* Arco apuntado con dovelas alternas: lo memorable del evento */
-.orn-arch {
-  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
-  width: min(96vw, 760px); height: min(100%, 950px); aspect-ratio: 4 / 5;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMax meet'%3E%3Cg fill='none'%3E%3Cpath d='M12 500V250C12 150 120 80 200 8C280 80 388 150 388 250V500' stroke='%23f1c76a' stroke-width='2.4'/%3E%3Cpath d='M34 500V252C34 164 132 100 200 36C268 100 366 164 366 252V500' stroke='%23f1c76a' stroke-width='1.4'/%3E%3Cpath d='M23 500V251C23 157 126 90 200 22C274 90 377 157 377 251V500' stroke='%23fff4e4' stroke-width='20' stroke-dasharray='15 15' opacity='.28'/%3E%3C/g%3E%3C/svg%3E") center bottom / contain no-repeat; opacity: .5;
-}
-.orn-arch--hub { left: auto; right: 3%; transform: none; opacity: .32; }
+/* Un color de la bandera por actividad */
+.act-green { --ev-glow:#1fa463; --ev-edge-a:#1fa463; --ev-edge-b:#a6e8c4; --ev-star:#1fa463; --ev-solid:#0b7a43; --ev-on-solid:#fff; }
+.act-white { --ev-glow:#f5f3ea; --ev-edge-a:#f5f3ea; --ev-edge-b:#c9d3cd; --ev-star:#f5f3ea; --ev-solid:#f5f3ea; --ev-on-solid:#0a0d0b; }
+.act-black { --ev-glow:#9aa6a0; --ev-edge-a:#7c8882; --ev-edge-b:#f5f3ea; --ev-star:#9aa6a0; --ev-solid:#0a0d0b; --ev-on-solid:#f5f3ea; }
+.act-red   { --ev-glow:#ff3b4d; --ev-edge-a:#ff6a77; --ev-edge-b:#ce1126; --ev-star:#ce1126; --ev-solid:#ce1126; --ev-on-solid:#fff; }
 
-/* Celosía de estrellas de ocho puntas, solo en los bordes */
-.orn-stars {
+/* El fondo es la bandera: se anula la elipse del tema base */
+body::before, body::after { display: none; }
+.orn-flag {
   position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23f1c76a' stroke-width='1.4'%3E%3Crect x='20' y='20' width='40' height='40'/%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='7'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 80px 80px; opacity: .11;
-  -webkit-mask-image: radial-gradient(ellipse at center, transparent 34%, #000 86%);
-          mask-image: radial-gradient(ellipse at center, transparent 34%, #000 86%);
+  background: linear-gradient(180deg,
+    rgba(11,122,67,.42) 0 33.34%,
+    rgba(245,243,234,.10) 33.34% 66.67%,
+    rgba(0,0,0,.50) 66.67% 100%);
 }
 
-/* Franja de piedra bicolor (ablaq) */
-.orn-ablaq {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 16px;
-  background: repeating-linear-gradient(90deg, #f6e8c8 0 30px, #2a0a14 30px 60px);
-  opacity: .5; border-top: 2px solid var(--ev-accent);
+/* Las tres estrellas rojas de cinco puntas, grandes, en la franja central */
+.orn-star {
+  position: absolute; left: var(--x); top: 50%; width: var(--s, min(30vmin, 290px)); aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+  background: var(--flag-red); opacity: .4;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpolygon points='20.00,2.00 24.47,14.85 38.07,15.13 27.23,23.35 31.17,36.37 20.00,28.60 8.83,36.37 12.77,23.35 1.93,15.13 15.53,14.85'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpolygon points='20.00,2.00 24.47,14.85 38.07,15.13 27.23,23.35 31.17,36.37 20.00,28.60 8.83,36.37 12.77,23.35 1.93,15.13 15.53,14.85'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-/* Estrella tras cada número y marco fino dorado */
+/* Los cuatro colores panárabes, en la base */
+.orn-stripes {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 9px;
+  background: linear-gradient(90deg, #0b7a43 0 25%, #f5f3ea 25% 50%, #1b211e 50% 75%, #ce1126 75% 100%);
+}
+
+/* Estrella tras cada número */
 .tile { position: relative; }
 .tile::before {
-  content: ""; position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23f1c76a' stroke-width='1.4'%3E%3Crect x='20' y='20' width='40' height='40'/%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='7'/%3E%3C/g%3E%3C/svg%3E") center / 74% no-repeat; opacity: .16; pointer-events: none;
+  content: ""; position: absolute; inset: 0; background: var(--ev-star); opacity: .42; pointer-events: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpolygon points='20.00,2.00 24.47,14.85 38.07,15.13 27.23,23.35 31.17,36.37 20.00,28.60 8.83,36.37 12.77,23.35 1.93,15.13 15.53,14.85'/%3E%3C/svg%3E") center / 70% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpolygon points='20.00,2.00 24.47,14.85 38.07,15.13 27.23,23.35 31.17,36.37 20.00,28.60 8.83,36.37 12.77,23.35 1.93,15.13 15.53,14.85'/%3E%3C/svg%3E") center / 70% no-repeat;
 }
 .tile::after {
   content: ""; position: absolute; inset: 9px; border-radius: inherit;
-  border: 1px solid rgba(241, 199, 106, .3); pointer-events: none;
+  border: 1px solid rgba(245, 243, 234, .22); pointer-events: none;
 }
 .tile strong { position: relative; z-index: 1; }
 
-/* Forma de ficha propia: puerta de arco */
-.countdown[data-shape="arch"] { --tile-radius: 50% 50% 16px 16px / 40% 40% 16px 16px; }
+/* Sello y botón destacado toman el color de la actividad */
+.cd-sticker { background: var(--ev-solid); color: var(--ev-on-solid); }
+.act-black .cd-sticker { box-shadow: 0 0 0 3px var(--flag-white), 0 14px 34px -10px var(--ev-glow); }
+.cd-cta--solid, .cd-cta--solid:hover { background: var(--ev-solid); border-color: var(--ev-solid); color: var(--ev-on-solid); }
+.act-black .cd-cta--solid { border-color: var(--flag-white); }
+.activity-link:hover { box-shadow: 0 18px 40px -16px var(--ev-glow); }
 
 .hub-arabic {
   margin: 0 0 14px; direction: rtl; text-align: left; unicode-bidi: isolate;
   font-family: var(--ev-font-display); font-weight: 600;
-  font-size: clamp(28px, 5vw, 46px); line-height: 1.2; color: var(--ev-accent);
+  font-size: clamp(28px, 5vw, 46px); line-height: 1.2; color: var(--flag-white);
 }
 .activity-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-@media (max-width: 640px) { .orn-arch--hub { right: -20%; opacity: .2; } }
+/* Cada tarjeta de actividad con el color de su franja */
+.activity-link[data-flag="green"] { --ev-edge-a:#1fa463; --ev-edge-b:#a6e8c4; }
+.activity-link[data-flag="white"] { --ev-edge-a:#f5f3ea; --ev-edge-b:#c9d3cd; }
+.activity-link[data-flag="black"] { --ev-edge-a:#7c8882; --ev-edge-b:#f5f3ea; }
+.activity-link[data-flag="red"]   { --ev-edge-a:#ff6a77; --ev-edge-b:#ce1126; }
